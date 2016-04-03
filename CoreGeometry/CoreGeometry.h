@@ -6,7 +6,7 @@
 //  Copyright © 2016 Pyrolyse. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
 //! Project version number for CoreGeometry.
 FOUNDATION_EXPORT double CoreGeometryVersionNumber;
