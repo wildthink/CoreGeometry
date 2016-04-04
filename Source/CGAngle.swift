@@ -8,6 +8,10 @@
 
 import CoreGraphics
 
+postfix operator ° { }
+
+public let M_2_PI = 2.0 * M_PI
+
 public struct CGAngle {
     #if arch(i386) || arch(arm)
     public typealias NativeType = Float
@@ -15,20 +19,36 @@ public struct CGAngle {
     public typealias NativeType = Double
     #endif
     
+    /// The native value.
+    public var native: NativeType
+    
     @_transparent public init() {
         self.native = 0.0
     }
     
     @_transparent public init(_ value: Float) {
-        self.native = NativeType(value)
+        self.native = NativeType((Float(M_2_PI) * value) % Float(M_2_PI))
+    }
+    
+    @_transparent public init(degree: Float) {
+        self.native = NativeType((Float(M_2_PI) + (degree / 180.0 * Float(M_PI))) % Float(M_2_PI))
     }
     
     @_transparent public init(_ value: Double) {
-        self.native = NativeType(value)
+        self.native = NativeType((M_2_PI * value) % M_2_PI)
     }
     
-    /// The native value.
-    public var native: NativeType
+    @_transparent public init(degree: Double) {
+        self.native = NativeType((M_2_PI + (degree / 180.0 * M_PI)) % M_2_PI)
+    }
+    
+    @_transparent public init(_ value: CGFloat) {
+        self.native = NativeType((CGFloat(M_2_PI) * value) % CGFloat(M_2_PI))
+    }
+    
+    @_transparent public init(degree: CGFloat) {
+        self.native = NativeType((CGFloat(M_2_PI) + (degree / 180.0 * CGFloat(M_PI))) % CGFloat(M_2_PI))
+    }
 }
 
 extension CGAngle {
@@ -73,43 +93,83 @@ extension CGAngle: FloatingPointType {
     }
     
     @_transparent public init(_ value: UInt8) {
-        self.native = NativeType(value)
+        self.native = (NativeType(M_2_PI) * NativeType(value)) % NativeType(M_2_PI)
+    }
+    
+    @_transparent public init(degree: UInt8) {
+        self.native = NativeType((NativeType(M_2_PI) * (NativeType(degree) / 180.0 * NativeType(M_PI))) % NativeType(M_2_PI))
     }
     
     @_transparent public init(_ value: Int8) {
-        self.native = NativeType(value)
+        self.native = (NativeType(M_2_PI) * NativeType(value)) % NativeType(M_2_PI)
+    }
+    
+    @_transparent public init(degree: Int8) {
+        self.native = NativeType((NativeType(M_2_PI) * (NativeType(degree) / 180.0 * NativeType(M_PI))) % NativeType(M_2_PI))
     }
     
     @_transparent public init(_ value: UInt16) {
-        self.native = NativeType(value)
+        self.native = (NativeType(M_2_PI) * NativeType(value)) % NativeType(M_2_PI)
+    }
+    
+    @_transparent public init(degree: UInt16) {
+        self.native = NativeType((NativeType(M_2_PI) * (NativeType(degree) / 180.0 * NativeType(M_PI))) % NativeType(M_2_PI))
     }
     
     @_transparent public init(_ value: Int16) {
-        self.native = NativeType(value)
+        self.native = (NativeType(M_2_PI) * NativeType(value)) % NativeType(M_2_PI)
+    }
+    
+    @_transparent public init(degree: Int16) {
+        self.native = NativeType((NativeType(M_2_PI) * (NativeType(degree) / 180.0 * NativeType(M_PI))) % NativeType(M_2_PI))
     }
     
     @_transparent public init(_ value: UInt32) {
-        self.native = NativeType(value)
+        self.native = (NativeType(M_2_PI) * NativeType(value)) % NativeType(M_2_PI)
+    }
+    
+    @_transparent public init(degree: UInt32) {
+        self.native = NativeType((NativeType(M_2_PI) * (NativeType(degree) / 180.0 * NativeType(M_PI))) % NativeType(M_2_PI))
     }
     
     @_transparent public init(_ value: Int32) {
-        self.native = NativeType(value)
+        self.native = (NativeType(M_2_PI) * NativeType(value)) % NativeType(M_2_PI)
+    }
+    
+    @_transparent public init(degree: Int32) {
+        self.native = NativeType((NativeType(M_2_PI) * (NativeType(degree) / 180.0 * NativeType(M_PI))) % NativeType(M_2_PI))
     }
     
     @_transparent public init(_ value: UInt64) {
-        self.native = NativeType(value)
+        self.native = (NativeType(M_2_PI) * NativeType(value)) % NativeType(M_2_PI)
+    }
+    
+    @_transparent public init(degree: UInt64) {
+        self.native = NativeType((NativeType(M_2_PI) * (NativeType(degree) / 180.0 * NativeType(M_PI))) % NativeType(M_2_PI))
     }
     
     @_transparent public init(_ value: Int64) {
-        self.native = NativeType(value)
+        self.native = (NativeType(M_2_PI) * NativeType(value)) % NativeType(M_2_PI)
+    }
+    
+    @_transparent public init(degree: Int64) {
+        self.native = NativeType((NativeType(M_2_PI) * (NativeType(degree) / 180.0 * NativeType(M_PI))) % NativeType(M_2_PI))
     }
     
     @_transparent public init(_ value: UInt) {
-        self.native = NativeType(value)
+        self.native = (NativeType(M_2_PI) * NativeType(value)) % NativeType(M_2_PI)
+    }
+    
+    @_transparent public init(degree: UInt) {
+        self.native = NativeType((NativeType(M_2_PI) * (NativeType(degree) / 180.0 * NativeType(M_PI))) % NativeType(M_2_PI))
     }
     
     @_transparent public init(_ value: Int) {
-        self.native = NativeType(value)
+        self.native = (NativeType(M_2_PI) * NativeType(value)) % NativeType(M_2_PI)
+    }
+    
+    @_transparent public init(degree: Int) {
+        self.native = NativeType((NativeType(M_2_PI) * (NativeType(degree) / 180.0 * NativeType(M_PI))) % NativeType(M_2_PI))
     }
     
     public static var infinity: CGAngle {
@@ -172,27 +232,18 @@ public var CGFLOAT_MAX: CGAngle {
 }
 
 extension CGAngle: CustomReflectable {
-    /// Returns a mirror that reflects `self`.
     public func customMirror() -> Mirror {
         return Mirror(reflecting: native)
     }
 }
 
 @_transparent extension CGAngle: CustomStringConvertible {
-    /// A textual representation of `self`.
     public var description: String {
         return native.description
     }
 }
 
 @_transparent extension CGAngle: Hashable {
-    /// The hash value.
-    ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
-    ///
-    /// - Note: the hash value is not guaranteed to be stable across
-    ///   different invocations of the same program.  Do not persist the
-    ///   hash value across program runs.
     public var hashValue: Int {
         return native.hashValue
     }
@@ -221,15 +272,11 @@ extension CGAngle: CustomReflectable {
     }
 }
 
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 199)
-
 @_transparent extension UInt8 {
     public init(_ value: CGAngle) {
         self = UInt8(value.native)
     }
 }
-
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 199)
 
 @_transparent extension Int8 {
     public init(_ value: CGAngle) {
@@ -237,15 +284,12 @@ extension CGAngle: CustomReflectable {
     }
 }
 
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 199)
-
 @_transparent extension UInt16 {
     public init(_ value: CGAngle) {
         self = UInt16(value.native)
     }
 }
 
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 199)
 
 @_transparent extension Int16 {
     public init(_ value: CGAngle) {
@@ -253,15 +297,11 @@ extension CGAngle: CustomReflectable {
     }
 }
 
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 199)
-
 @_transparent extension UInt32 {
     public init(_ value: CGAngle) {
         self = UInt32(value.native)
     }
 }
-
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 199)
 
 @_transparent extension Int32 {
     public init(_ value: CGAngle) {
@@ -269,15 +309,11 @@ extension CGAngle: CustomReflectable {
     }
 }
 
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 199)
-
 @_transparent extension UInt64 {
     public init(_ value: CGAngle) {
         self = UInt64(value.native)
     }
 }
-
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 199)
 
 @_transparent extension Int64 {
     public init(_ value: CGAngle) {
@@ -285,23 +321,17 @@ extension CGAngle: CustomReflectable {
     }
 }
 
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 199)
-
 @_transparent extension UInt {
     public init(_ value: CGAngle) {
         self = UInt(value.native)
     }
 }
 
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 199)
-
 @_transparent extension Int {
     public init(_ value: CGAngle) {
         self = Int(value.native)
     }
 }
-
-// ###sourceLocation(file: "/Users/Pyroh/Downloads/CGAngle.swift.gyb", line: 207)
 
 
 @_transparent extension Double {
@@ -316,12 +346,18 @@ extension CGAngle: CustomReflectable {
     }
 }
 
+@_transparent extension CGFloat {
+    public init(_ value: CGAngle) {
+        self = CGFloat(value.native)
+    }
+}
+
 // Comparisons.
 @_transparent extension CGAngle: Equatable { }
 
 @_transparent
 @warn_unused_result
-public func ==(lhs: CGAngle, rhs: CGAngle) -> Bool { //FIXME: Not so easy
+public func ==(lhs: CGAngle, rhs: CGAngle) -> Bool {
     return lhs.native == rhs.native
 }
 
@@ -340,31 +376,31 @@ public prefix func + (x: CGAngle) -> CGAngle { return x }
 
 @_transparent
 @warn_unused_result
-public prefix func - (x: CGAngle) -> CGAngle { return CGAngle(-x.native) }//FIXME: Not so easy
+public prefix func - (x: CGAngle) -> CGAngle { return CGAngle(-x.native) }
 
 @_transparent
 public prefix func ++ (inout x: CGAngle) -> CGAngle {
-    x.native += 1.0
+    x.native = CGAngle(x.native + 1.0).native
     return x
 }
 
 @_transparent
 public prefix func -- (inout x: CGAngle) -> CGAngle {
-    x.native -= 1.0
+    x.native = CGAngle(x.native - 1.0).native
     return x
 }
 
 @_transparent
 public postfix func ++ (inout x: CGAngle) -> CGAngle {
     let tmp = x
-    x.native += 1.0
+    x.native = CGAngle(x.native + 1.0).native
     return tmp
 }
 
 @_transparent
 public postfix func -- (inout x: CGAngle) -> CGAngle {
     let tmp = x
-    x.native -= 1.0
+    x.native = CGAngle(x.native - 1.0).native
     return tmp
 }
 
@@ -402,29 +438,81 @@ public func %(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
 // CGAngle assignment operators.
 @_transparent
 public func +=(inout lhs: CGAngle, rhs: CGAngle) {
-    lhs.native = lhs.native + rhs.native
+    lhs.native = CGAngle(lhs.native + rhs.native).native
 }
 
 @_transparent
 public func -=(inout lhs: CGAngle, rhs: CGAngle) {
-    lhs.native = lhs.native - rhs.native
+    lhs.native = CGAngle(lhs.native - rhs.native).native
 }
 
 @_transparent
 public func *=(inout lhs: CGAngle, rhs: CGAngle) {
-    lhs.native = lhs.native * rhs.native
+    lhs.native = CGAngle(lhs.native * rhs.native).native
 }
 
 @_transparent
 public func /=(inout lhs: CGAngle, rhs: CGAngle) {
-    lhs.native = lhs.native / rhs.native
+    lhs.native = CGAngle(lhs.native / rhs.native).native
 }
 
 @_transparent
 public func %=(inout lhs: CGAngle, rhs: CGAngle) {
-    lhs.native = lhs.native % rhs.native
+    lhs.native = CGAngle(lhs.native % rhs.native).native
 }
 
+// ° operator
+@_transparent public postfix func °(lhs: Float) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: Double) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: CGFloat) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: UInt8) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: Int8) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: UInt16) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: Int16) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: UInt32) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: Int32) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: UInt64) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: Int64) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: UInt) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
+
+@_transparent public postfix func °(lhs: Int) -> CGAngle {
+    return CGAngle(degree: lhs)
+}
 // CGAngle tgmath.
 
 @_transparent

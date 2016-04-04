@@ -1,15 +1,15 @@
 //
-//  CoreGeometryTests.swift
-//  CoreGeometryTests
+//  CoreGeometry_macOSXTests.swift
+//  CoreGeometry_macOSXTests
 //
-//  Created by Pierre TACCHI on 01/04/16.
+//  Created by Pierre TACCHI on 04/04/16.
 //  Copyright © 2016 Pyrolyse. All rights reserved.
 //
 
 import XCTest
-@testable import CoreGeometry
+@testable import CoreGeometry_macOSX
 
-class CoreGeometryTests: XCTestCase {
+class CoreGeometry_macOSXTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

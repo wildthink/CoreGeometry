@@ -4,12 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CoreGeometry iOS.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>CoreGeometry macOS.xcscheme</key>
+		<key>CoreGeometry_macOSX.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -33,6 +28,16 @@
 			<true/>
 		</dict>
 		<key>3F2ED9661CAE732B00D2944A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3F2ED9861CB28E7600D2944A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3F2ED98F1CB28E7700D2944A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
