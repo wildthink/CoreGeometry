@@ -57,7 +57,7 @@ extension CGPoint {
     public func rotateRelativeTo(center: CGPoint, by angle: CGAngle) -> CGPoint {
         var transform = CGAffineTransformMakeTranslation(center.x, center.y)
         transform = CGAffineTransformRotate(transform, angle.normalized)
-        transform = CGAffineTransformMakeTranslation(-center.x, -center.y)
+        transform = CGAffineTransformTranslate(transform, -center.x, -center.y)
         return CGPointApplyAffineTransform(self, transform)
     }
     

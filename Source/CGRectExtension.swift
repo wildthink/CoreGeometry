@@ -70,7 +70,7 @@ public extension CGRect {
     public func rotateRelativeTo(center: CGPoint, by angle: CGAngle) -> CGRect {
         var transform = CGAffineTransformMakeTranslation(center.x, center.y)
         transform = CGAffineTransformRotate(transform, angle.normalized)
-        transform = CGAffineTransformMakeTranslation(-center.x, -center.y)
+        transform = CGAffineTransformTranslate(transform, -center.x, -center.y)
         return CGRectApplyAffineTransform(self, transform)
     }
     
