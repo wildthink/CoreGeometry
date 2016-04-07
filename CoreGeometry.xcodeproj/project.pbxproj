@@ -668,6 +668,7 @@
 				3F2ED99A1CB28E7700D2944A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F2ED99B1CB28E7700D2944A /* Build configuration list for PBXNativeTarget "CoreGeometry_macOSXTests" */ = {
 			isa = XCConfigurationList;
@@ -676,6 +677,7 @@
 				3F2ED99D1CB28E7700D2944A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F2ED9C01CB68A5800D2944A /* Build configuration list for PBXNativeTarget "CoreGeometry_iOS" */ = {
 			isa = XCConfigurationList;
@@ -684,6 +686,7 @@
 				3F2ED9C21CB68A5800D2944A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F2ED9C31CB68A5800D2944A /* Build configuration list for PBXNativeTarget "CoreGeometry_iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -692,6 +695,7 @@
 				3F2ED9C51CB68A5800D2944A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3F2ED9AE1CB68A5800D2944A"
-               BuildableName = "CoreGeometry_iOS.framework"
+               BuildableName = "CoreGeometry.framework"
                BlueprintName = "CoreGeometry_iOS"
                ReferencedContainer = "container:CoreGeometry.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3F2ED9AE1CB68A5800D2944A"
-            BuildableName = "CoreGeometry_iOS.framework"
+            BuildableName = "CoreGeometry.framework"
             BlueprintName = "CoreGeometry_iOS"
             ReferencedContainer = "container:CoreGeometry.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3F2ED9AE1CB68A5800D2944A"
-            BuildableName = "CoreGeometry_iOS.framework"
+            BuildableName = "CoreGeometry.framework"
             BlueprintName = "CoreGeometry_iOS"
             ReferencedContainer = "container:CoreGeometry.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3F2ED9AE1CB68A5800D2944A"
-            BuildableName = "CoreGeometry_iOS.framework"
+            BuildableName = "CoreGeometry.framework"
             BlueprintName = "CoreGeometry_iOS"
             ReferencedContainer = "container:CoreGeometry.xcodeproj">
          </BuildableReference>

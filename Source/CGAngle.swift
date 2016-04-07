@@ -453,8 +453,20 @@ public func +(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
 
 @_transparent
 @warn_unused_result
+public func +(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
+    return CGAngle(lhs.native + rhs)
+}
+
+@_transparent
+@warn_unused_result
 public func -(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
     return CGAngle(lhs.native - rhs.native)
+}
+
+@_transparent
+@warn_unused_result
+public func -(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
+    return CGAngle(lhs.native + rhs)
 }
 
 @_transparent
@@ -465,14 +477,31 @@ public func *(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
 
 @_transparent
 @warn_unused_result
+public func *(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
+    return CGAngle(lhs.native + rhs)
+}
+
+@_transparent
+@warn_unused_result
 public func /(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
     return CGAngle(lhs.native / rhs.native)
+}
+@_transparent
+@warn_unused_result
+public func /(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
+    return CGAngle(lhs.native + rhs)
 }
 
 @_transparent
 @warn_unused_result
 public func %(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
     return CGAngle(lhs.native % rhs.native)
+}
+
+@_transparent
+@warn_unused_result
+public func %(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
+    return CGAngle(lhs.native + rhs)
 }
 
 // CGAngle assignment operators.
@@ -482,8 +511,18 @@ public func +=(inout lhs: CGAngle, rhs: CGAngle) {
 }
 
 @_transparent
+public func +=(inout lhs: CGAngle, rhs: CGFloat) {
+    lhs.native = CGAngle(lhs.native + rhs).native
+}
+
+@_transparent
 public func -=(inout lhs: CGAngle, rhs: CGAngle) {
     lhs.native = CGAngle(lhs.native - rhs.native).native
+}
+
+@_transparent
+public func -=(inout lhs: CGAngle, rhs: CGFloat) {
+    lhs.native = CGAngle(lhs.native + rhs).native
 }
 
 @_transparent
@@ -492,13 +531,28 @@ public func *=(inout lhs: CGAngle, rhs: CGAngle) {
 }
 
 @_transparent
+public func *=(inout lhs: CGAngle, rhs: CGFloat) {
+    lhs.native = CGAngle(lhs.native + rhs).native
+}
+
+@_transparent
 public func /=(inout lhs: CGAngle, rhs: CGAngle) {
     lhs.native = CGAngle(lhs.native / rhs.native).native
 }
 
 @_transparent
+public func /=(inout lhs: CGAngle, rhs: CGFloat) {
+    lhs.native = CGAngle(lhs.native + rhs).native
+}
+
+@_transparent
 public func %=(inout lhs: CGAngle, rhs: CGAngle) {
     lhs.native = CGAngle(lhs.native % rhs.native).native
+}
+
+@_transparent
+public func %=(inout lhs: CGAngle, rhs: CGFloat) {
+    lhs.native = CGAngle(lhs.native + rhs).native
 }
 
 // CGAngle tgmath.
