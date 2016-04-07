@@ -7,30 +7,19 @@
 //
 
 import XCTest
-@testable import CoreGeometry_macOSX
 
 class CoreGeometry_macOSXTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    func testDegree() {
+        XCTAssertEqual(CGAngleZero, 0°)
+        XCTAssertEqual(CGAngle.PI_4, 45°)
+        XCTAssertEqual(CGAngle.PI_2 , 90°)
+        XCTAssertEqual(CGAngle.PI, 180°)
+        XCTAssertEqual(CGAngle.PI2, 360°)
+        for i in 0...360 {
+            XCTAssert((360 - i)° === (-i°))
+            XCTAssert((360 + i)° === i°)
         }
+        XCTAssertFalse((60 + 10000)° == 60°)
+        XCTAssert((60 + 36000)° === 60°)
     }
-    
 }

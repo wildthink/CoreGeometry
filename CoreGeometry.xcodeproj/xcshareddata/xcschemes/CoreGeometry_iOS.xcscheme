@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3F2ED9861CB28E7600D2944A"
-               BuildableName = "CoreGeometry_macOSX.framework"
-               BlueprintName = "CoreGeometry_macOSX"
+               BlueprintIdentifier = "3F2ED9AE1CB68A5800D2944A"
+               BuildableName = "CoreGeometry_iOS.framework"
+               BlueprintName = "CoreGeometry_iOS"
                ReferencedContainer = "container:CoreGeometry.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3F2ED98F1CB28E7700D2944A"
-               BuildableName = "CoreGeometry_macOSXTests.xctest"
-               BlueprintName = "CoreGeometry_macOSXTests"
+               BlueprintIdentifier = "3F2ED9B71CB68A5800D2944A"
+               BuildableName = "CoreGeometry_iOSTests.xctest"
+               BlueprintName = "CoreGeometry_iOSTests"
                ReferencedContainer = "container:CoreGeometry.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F2ED9861CB28E7600D2944A"
-            BuildableName = "CoreGeometry_macOSX.framework"
-            BlueprintName = "CoreGeometry_macOSX"
+            BlueprintIdentifier = "3F2ED9AE1CB68A5800D2944A"
+            BuildableName = "CoreGeometry_iOS.framework"
+            BlueprintName = "CoreGeometry_iOS"
             ReferencedContainer = "container:CoreGeometry.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F2ED9861CB28E7600D2944A"
-            BuildableName = "CoreGeometry_macOSX.framework"
-            BlueprintName = "CoreGeometry_macOSX"
+            BlueprintIdentifier = "3F2ED9AE1CB68A5800D2944A"
+            BuildableName = "CoreGeometry_iOS.framework"
+            BlueprintName = "CoreGeometry_iOS"
             ReferencedContainer = "container:CoreGeometry.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F2ED9861CB28E7600D2944A"
-            BuildableName = "CoreGeometry_macOSX.framework"
-            BlueprintName = "CoreGeometry_macOSX"
+            BlueprintIdentifier = "3F2ED9AE1CB68A5800D2944A"
+            BuildableName = "CoreGeometry_iOS.framework"
+            BlueprintName = "CoreGeometry_iOS"
             ReferencedContainer = "container:CoreGeometry.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

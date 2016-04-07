@@ -14,6 +14,7 @@ public extension CGRect {
         get { return CGPoint(x: self.midX, y: self.midY) }
     }
     
+    @_transparent
     public init(center: CGPoint, size: CGSize) {
         let r = CGRect(origin: CGPointZero, size: size)
         self = r.centerAt(center)
@@ -63,5 +64,26 @@ public extension CGRect {
     
     public mutating func centerInPlace(x x: Int, y: Int) {
         self = self.centerAt(x: x, y: y)
+    }
+    
+    @warn_unused_result
+    public func rotateRelativeTo(center: CGPoint, by angle: CGAngle) -> CGRect {
+        var transform = CGAffineTransformMakeTranslation(center.x, center.y)
+        transform = CGAffineTransformRotate(transform, angle.normalized)
+        transform = CGAffineTransformMakeTranslation(-center.x, -center.y)
+        return CGRectApplyAffineTransform(self, transform)
+    }
+    
+    public mutating func rotateInPlace(center: CGPoint, by angle: CGAngle) {
+        self = self.rotateRelativeTo(center, by: angle)
+    }
+    
+    @warn_unused_result
+    public func rotateCenterRelativeTo(center: CGPoint, by angle: CGAngle) -> CGRect {
+        return self.centerAt(self.center.rotateRelativeTo(center, by: angle))
+    }
+    
+    public mutating func rotateCenterInPlace(center: CGPoint, by angle: CGAngle) {
+        self = self.rotateCenterRelativeTo(center, by: angle)
     }
 }
