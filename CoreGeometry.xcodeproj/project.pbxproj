@@ -33,6 +33,8 @@
 		3F2ED9CD1CB68A9300D2944A /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2ED97A1CAEAD4E00D2944A /* CGPointExtension.swift */; };
 		3F2ED9CE1CB68A9300D2944A /* CGAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2ED9751CAEAD2900D2944A /* CGAngle.swift */; };
 		3F2ED9CF1CB68A9300D2944A /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2ED9A31CB65D0A00D2944A /* Operators.swift */; };
+		3F2ED9E61CB6AFF500D2944A /* ObjectiveCBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2ED9E51CB6AFF500D2944A /* ObjectiveCBridge.swift */; };
+		3F2ED9E71CB6AFF500D2944A /* ObjectiveCBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2ED9E51CB6AFF500D2944A /* ObjectiveCBridge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,7 @@
 		3F2ED9B81CB68A5800D2944A /* CoreGeometry_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreGeometry_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2ED9BD1CB68A5800D2944A /* CoreGeometry_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGeometry_iOSTests.swift; sourceTree = "<group>"; };
 		3F2ED9BF1CB68A5800D2944A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F2ED9E51CB6AFF500D2944A /* ObjectiveCBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObjectiveCBridge.swift; path = Source/ObjectiveCBridge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +138,7 @@
 				3F2ED97A1CAEAD4E00D2944A /* CGPointExtension.swift */,
 				3F2ED9751CAEAD2900D2944A /* CGAngle.swift */,
 				3F2ED9A31CB65D0A00D2944A /* Operators.swift */,
+				3F2ED9E51CB6AFF500D2944A /* ObjectiveCBridge.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -369,6 +373,7 @@
 			files = (
 				3F2ED99F1CB29CD700D2944A /* CGSizeExtension.swift in Sources */,
 				3F2ED9A41CB65D0A00D2944A /* Operators.swift in Sources */,
+				3F2ED9E61CB6AFF500D2944A /* ObjectiveCBridge.swift in Sources */,
 				3F2ED9A11CB29CD700D2944A /* CGAngle.swift in Sources */,
 				3F2ED99E1CB29CD700D2944A /* CGRectExtension.swift in Sources */,
 				3F2ED9A01CB29CD700D2944A /* CGPointExtension.swift in Sources */,
@@ -394,6 +399,7 @@
 			files = (
 				3F2ED9CC1CB68A9300D2944A /* CGSizeExtension.swift in Sources */,
 				3F2ED9CF1CB68A9300D2944A /* Operators.swift in Sources */,
+				3F2ED9E71CB6AFF500D2944A /* ObjectiveCBridge.swift in Sources */,
 				3F2ED9CE1CB68A9300D2944A /* CGAngle.swift in Sources */,
 				3F2ED9CB1CB68A9300D2944A /* CGRectExtension.swift in Sources */,
 				3F2ED9CD1CB68A9300D2944A /* CGPointExtension.swift in Sources */,

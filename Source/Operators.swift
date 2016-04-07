@@ -6,8 +6,6 @@
 //  Copyright © 2016 Pyrolyse. All rights reserved.
 //
 
-import Foundation
-
 postfix operator ° { }
 infix operator ± { associativity none precedence 130 }
 infix operator ±= { associativity none precedence 130 }
