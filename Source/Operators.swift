@@ -9,6 +9,7 @@
 postfix operator ° { }
 infix operator ± { associativity none precedence 130 }
 infix operator ±= { associativity none precedence 130 }
+infix operator =~ { associativity none precedence 130 }
 
 //MARK: ° operator
 @_transparent

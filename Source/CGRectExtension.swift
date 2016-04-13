@@ -66,10 +66,50 @@ public extension CGRect {
         self = self.centerAt(x: x, y: y)
     }
     
+    @_transparent
+    public func translateBy(vector: CGVector) -> CGRect {
+        return CGRect(origin: self.origin.translateBy(vector), size: self.size)
+    }
+    
+    @_transparent
+    public func translateBy(tx tx: CGFloat, ty: CGFloat) -> CGRect {
+        return CGRect(origin: self.origin.translateBy(tx: tx, ty: ty), size: self.size)
+    }
+    
+    @_transparent
+    public func translateBy(tx tx: Double, ty: Double) -> CGRect {
+        return CGRect(origin: self.origin.translateBy(tx: tx, ty: ty), size: self.size)
+    }
+    
+    @_transparent
+    public func translateBy(tx tx: Int, ty: Int) -> CGRect {
+        return CGRect(origin: self.origin.translateBy(tx: tx, ty: ty), size: self.size)
+    }
+    
+    @_transparent
+    public mutating func translateInPlace(vector: CGVector) {
+        self = self.translateBy(vector)
+    }
+    
+    @_transparent
+    public mutating func translateInPlace(tx tx: CGFloat, ty: CGFloat) {
+        self = self.translateBy(tx: tx, ty: ty)
+    }
+    
+    @_transparent
+    public mutating func translateInPlace(tx tx: Double, ty: Double) {
+        self = self.translateBy(tx: tx, ty: ty)
+    }
+    
+    @_transparent
+    public mutating func translateInPlace(tx tx: Int, ty: Int) {
+        self = self.translateBy(tx: tx, ty: ty)
+    }
+    
     @warn_unused_result
     public func rotateRelativeTo(center: CGPoint, by angle: CGAngle) -> CGRect {
         var transform = CGAffineTransformMakeTranslation(center.x, center.y)
-        transform = CGAffineTransformRotate(transform, angle.normalized)
+        transform = CGAffineTransformRotate(transform, angle.normalized.native)
         transform = CGAffineTransformTranslate(transform, -center.x, -center.y)
         return CGRectApplyAffineTransform(self, transform)
     }

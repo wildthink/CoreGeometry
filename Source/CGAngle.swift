@@ -18,9 +18,9 @@ public var CGAngleZero: CGAngle { return CGAngle() }
 public struct CGAngle {
     /// The native value.
     public var native: CGFloat
-    public var normalized: CGFloat {
+    public var normalized: CGAngle {
         @_transparent get {
-            return (CG_2_PI + native % CG_2_PI) % CG_2_PI
+            return CGAngle((CG_2_PI + native % CG_2_PI) % CG_2_PI)
         }
     }
     @_transparent
@@ -32,9 +32,25 @@ public struct CGAngle {
             self = degree°
         }
     }
-    public var normalizedDegree: CGFloat {
-        @_transparent get {
-            return (CG_2_PI + degree % 360 / 180 * CG_PI) % CG_2_PI
+    
+    public var sin: CGFloat {
+        @_transparent
+        get {
+            return CoreGeometry.sin(self)
+        }
+    }
+    
+    public var cos: CGFloat {
+        @_transparent
+        get {
+            return CoreGeometry.cos(self)
+        }
+    }
+    
+    public var tan: CGFloat {
+        @_transparent
+        get {
+            return CoreGeometry.tan(self)
         }
     }
     
@@ -397,8 +413,8 @@ public func ==(lhs: CGAngle, rhs: CGAngle) -> Bool {
 
 @_transparent
 @warn_unused_result
-public func ===(lhs: CGAngle, rhs: CGAngle) -> Bool {
-    return lhs.normalized - rhs.normalized ± CGFloat(FLT_EPSILON)
+public func =~(lhs: CGAngle, rhs: CGAngle) -> Bool {
+    return lhs.normalized.native - rhs.normalized.native ± CGFloat(FLT_EPSILON)
 }
 
 @_transparent extension CGAngle: Comparable { }
@@ -559,8 +575,8 @@ public func %=(inout lhs: CGAngle, rhs: CGFloat) {
 
 @_transparent
 @warn_unused_result
-public func acos(x: CGAngle) -> CGFloat {
-    return acos(x.native)
+public func acos(x: CGFloat) -> CGAngle {
+    return CGAngle(acos(x))
 }
 
 @_transparent
@@ -577,14 +593,14 @@ public func sin(x: CGAngle) -> CGFloat {
 
 @_transparent
 @warn_unused_result
-public func asin(x: CGAngle) -> CGFloat {
-    return asin(x.native)
+public func asin(x: CGFloat) -> CGAngle {
+    return CGAngle(asin(x))
 }
 
 @_transparent
 @warn_unused_result
-public func atan(x: CGAngle) -> CGFloat {
-    return atan(x.native)
+public func atan(x: CGFloat) -> CGAngle {
+    return CGAngle(atan(x))
 }
 
 @_transparent
@@ -595,20 +611,20 @@ public func tan(x: CGAngle) -> CGFloat {
 
 @_transparent
 @warn_unused_result
-public func acosh(x: CGAngle) -> CGFloat {
-    return acosh(x.native)
+public func acosh(x: CGFloat) -> CGAngle {
+    return CGAngle(acosh(x))
 }
 
 @_transparent
 @warn_unused_result
-public func asinh(x: CGAngle) -> CGFloat {
-    return asinh(x.native)
+public func asinh(x: CGFloat) -> CGAngle {
+    return CGAngle(asinh(x))
 }
 
 @_transparent
 @warn_unused_result
-public func atanh(x: CGAngle) -> CGFloat {
-    return atanh(x.native)
+public func atanh(x: CGFloat) -> CGAngle {
+    return CGAngle(atanh(x))
 }
 
 @_transparent

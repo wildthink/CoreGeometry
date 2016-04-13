@@ -8,6 +8,14 @@
 
 import CoreGraphics
 
+extension CGVector {
+    public var len: CGFloat {
+        @_transparent get {
+            return sqrt(pow(dx, 2) + pow(dy, 2))
+        }
+    }
+}
+
 extension CGPoint {
     @_transparent
     public init(vector: CGVector) {
@@ -56,7 +64,7 @@ extension CGPoint {
     
     public func rotateRelativeTo(center: CGPoint, by angle: CGAngle) -> CGPoint {
         var transform = CGAffineTransformMakeTranslation(center.x, center.y)
-        transform = CGAffineTransformRotate(transform, angle.normalized)
+        transform = CGAffineTransformRotate(transform, angle.normalized.native)
         transform = CGAffineTransformTranslate(transform, -center.x, -center.y)
         return CGPointApplyAffineTransform(self, transform)
     }
