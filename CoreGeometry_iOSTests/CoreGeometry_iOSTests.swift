@@ -33,5 +33,14 @@ class CoreGeometry_iOSTests: XCTestCase {
         XCTAssert(getNormalizedAngle(center: center, point: p225) =~ 225°)
         XCTAssert(getNormalizedAngle(center: center, point: p270) =~ 270°)
         XCTAssert(getNormalizedAngle(center: center, point: p315) =~ 315°)
+        
+        XCTAssert(center.getVector(p0).direction =~ 0°)
+        XCTAssert(center.getVector(p45).direction =~ 45°)
+        XCTAssert(center.getVector(p90).direction =~ 90°)
+        XCTAssert(center.getVector(p135).direction =~ 135°)
+        XCTAssert(center.getVector(p180).direction =~ 180°)
+        XCTAssert(center.getVector(p225).direction =~ 225°)
+        XCTAssert(center.getVector(p270).direction =~ 270°)
+        XCTAssert(center.getVector(p315).direction =~ 315°)
     }
 }
