@@ -12,14 +12,16 @@ import CoreGraphics
 public var CGVectorZero: CGVector { get { return CGVector() } }
 
 extension CGVector {
+        /// The vector magnitude.
     public var magnitude: CGFloat {
         @_transparent get {
             return sqrt(pow(dx, 2) + pow(dy, 2))
         }
     }
     
+        /// The vector direction.
     public var direction: CGAngle {
-        get {
+        @_transparent get {
             return CGAngle(asin(dy / magnitude)) + (dx < 0 && dy > 0 ? 90° : 0°) - (dx < 0 && dy < 0 ? 90° : 0°) + (dx < 0 && dy == 0 ? 180° : 0°)
         }
     }

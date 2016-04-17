@@ -15,14 +15,35 @@ public let CG_2_PI = 2.0 * CGFloat(M_PI)
 
 public var CGAngleZero: CGAngle { return CGAngle() }
 
+/**
+ A structure that contains an angle value in radian.
+ */
 public struct CGAngle {
-    /// The native value.
+        /// The angle native value in radian.
     public var native: CGFloat
+
+    @_transparent public init() {
+        self.native = 0.0
+    }
+
+    @_transparent public init(_ value: CGFloat) {
+        self.native = value
+    }
+
+    @_transparent public init(degree: CGFloat) {
+        self.native = degree / 180 * CG_PI
+    }
+}
+
+extension CGAngle {
+        /// The normalized value in `0..<2π`
     public var normalized: CGAngle {
         @_transparent get {
             return CGAngle((CG_2_PI + native % CG_2_PI) % CG_2_PI)
         }
     }
+
+        /// The angle value in degrees.
     @_transparent
     public var degree: CGFloat {
         get {
@@ -32,72 +53,97 @@ public struct CGAngle {
             self = degree°
         }
     }
-    
+
+        /// The sine value of the angle.
     public var sin: CGFloat {
         @_transparent
         get {
             return CoreGeometry.sin(self)
         }
     }
-    
+
+        /// The cosine value of the angle.
     public var cos: CGFloat {
         @_transparent
         get {
             return CoreGeometry.cos(self)
         }
     }
-    
+
+        /// The tangent value of the angle.
     public var tan: CGFloat {
         @_transparent
         get {
             return CoreGeometry.tan(self)
         }
     }
-    
-    @_transparent public init() {
-        self.native = 0.0
-    }
-    
+
     @_transparent public init(_ value: Float) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: Float) {
-        self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     @_transparent public init(_ value: Double) {
         self.native = CGFloat(value)
     }
-    
+}
+
+extension CGAngle {
+    @_transparent public init(degree: Float) {
+        self.native = CGFloat(degree) / 180 * CG_PI
+    }
+
     @_transparent public init(degree: Double) {
         self.native = CGFloat(degree) / 180 * CG_PI
     }
-    
-    @_transparent public init(_ value: CGFloat) {
-        self.native = value
+
+    @_transparent public init(degree: UInt8) {
+        self.native = CGFloat(degree) / 180 * CG_PI
     }
-    
-    @_transparent public init(degree: CGFloat) {
-        self.native = degree / 180 * CG_PI
+
+    @_transparent public init(degree: Int8) {
+        self.native = CGFloat(degree) / 180 * CG_PI
+    }
+
+    @_transparent public init(degree: UInt16) {
+        self.native = CGFloat(degree) / 180 * CG_PI
+    }
+
+    @_transparent public init(degree: Int16) {
+        self.native = CGFloat(degree) / 180 * CG_PI
+    }
+
+    @_transparent public init(degree: UInt32) {
+        self.native = CGFloat(degree) / 180 * CG_PI
+    }
+
+    @_transparent public init(degree: Int32) {
+        self.native = CGFloat(degree) / 180 * CG_PI
+    }
+
+    @_transparent public init(degree: UInt64) {
+        self.native = CGFloat(degree) / 180 * CG_PI
+    }
+
+    @_transparent public init(degree: Int64) {
+        self.native = CGFloat(degree) / 180 * CG_PI
+    }
+
+    @_transparent public init(degree: UInt) {
+        self.native = CGFloat(degree) / 180 * CG_PI
+    }
+
+    @_transparent public init(degree: Int) {
+        self.native = CGFloat(degree) / 180 * CG_PI
     }
 }
 
 extension CGAngle {
     @_transparent public static var min: CGAngle {
-        #if arch(i386) || arch(arm)
-            return CGAngle(FLT_MIN)
-        #else
-            return CGAngle(DBL_MIN)
-        #endif
+            return CGAngle(CGFloat.min)
     }
-    
+
     @_transparent public static var max: CGAngle {
-        #if arch(i386) || arch(arm)
-            return CGAngle(FLT_MAX)
-        #else
-            return CGAngle(DBL_MAX)
-        #endif
+        return CGAngle(CGFloat.max)
     }
 }
 
@@ -106,7 +152,7 @@ extension CGAngle: Strideable {
     public func advancedBy(n: CGAngle) -> CGAngle {
         return CGAngle(self.native + n.native)
     }
-    
+
     @warn_unused_result
     public func distanceTo(other: CGAngle) -> CGAngle {
         return CGAngle(other.native - self.native)
@@ -115,168 +161,132 @@ extension CGAngle: Strideable {
 
 extension CGAngle: FloatingPointType {
     public typealias _BitsType = UInt
-    
+
     public static func _fromBitPattern(bits: UInt) -> CGAngle {
         return CGAngle(CGFloat._fromBitPattern(CGFloat._BitsType(bits)))
     }
-    
+
     public func _toBitPattern() -> UInt {
         return UInt(native._toBitPattern())
     }
-    
+
     @_transparent public init(_ value: UInt8) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: UInt8) {
-        self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     @_transparent public init(_ value: Int8) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: Int8) {
-        self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     @_transparent public init(_ value: UInt16) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: UInt16) {
-        self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     @_transparent public init(_ value: Int16) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: Int16) {
-        self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     @_transparent public init(_ value: UInt32) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: UInt32) {
-        self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     @_transparent public init(_ value: Int32) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: Int32) {
-        self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     @_transparent public init(_ value: UInt64) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: UInt64) {
-         self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     @_transparent public init(_ value: Int64) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: Int64) {
-        self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     @_transparent public init(_ value: UInt) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: UInt) {
-        self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     @_transparent public init(_ value: Int) {
         self.native = CGFloat(value)
     }
-    
-    @_transparent public init(degree: Int) {
-        self.native = CGFloat(degree) / 180 * CG_PI
-    }
-    
+
     public static var infinity: CGAngle {
         return CGAngle(CGFloat.infinity)
     }
-    
+
     public static var NaN: CGAngle {
         return CGAngle(CGFloat.NaN)
     }
-    
+
     public static var quietNaN: CGAngle {
         return CGAngle(CGFloat.quietNaN)
     }
-    
+
     public var isSignMinus: Bool {
         return native.isSignMinus
     }
-    
+
     public var isNormal: Bool {
         return native.isNormal
     }
-    
+
     public var isFinite: Bool {
         return native.isFinite
     }
-    
+
     public var isZero: Bool {
         return native.isZero
     }
-    
+
     public var isSubnormal: Bool {
         return native.isSubnormal
     }
-    
+
     public var isInfinite: Bool {
         return native.isInfinite
     }
-    
+
     public var isNaN: Bool {
         return native.isNaN
     }
-    
+
     public var isSignaling: Bool {
         return native.isSignaling
     }
-    
+
     public var floatingPointClass: FloatingPointClassification {
         return native.floatingPointClass
     }
 }
 
 extension CGAngle {
+        /// An angle contant with value of π/4
     public static var PI_4: CGAngle {
         return CGAngle(M_PI_4)
     }
-    
+
+        /// An angle contant with value of π/2
     public static var PI_2: CGAngle {
         return CGAngle(M_PI_2)
     }
-    
+
+        /// An angle contant with value of π
     public static var PI: CGAngle {
         return CGAngle(M_PI)
     }
-    
+
+        /// An angle contant with value of 2π
     public static var PI2: CGAngle {
         return CGAngle(CG_2_PI)
     }
 }
 
-@available(*,unavailable,message="use CGAngle.min")
+@available(*, unavailable, message="use CGAngle.min")
 public var CGFLOAT_MIN: CGAngle {
     fatalError("can't retrieve unavailable property")
 }
 
-@available(*,unavailable,message="use CGAngle.max")
+@available(*, unavailable, message="use CGAngle.max")
 public var CGFLOAT_MAX: CGAngle {
     fatalError("can't retrieve unavailable property")
 }
@@ -962,7 +972,7 @@ extension CGAngle: _CVarArgPassedAsDouble {
     public var _cVarArgEncoding: [Int] {
         return native._cVarArgEncoding
     }
-    
+
     /// Return the required alignment in bytes of
     /// the value returned by `_cVarArgEncoding`.
     public var _cVarArgAlignment: Int {
