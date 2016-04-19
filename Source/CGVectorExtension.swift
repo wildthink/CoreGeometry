@@ -9,7 +9,11 @@
 import CoreGraphics
 
 /// A vector constant with magnitude and direction equal to `0`. The zero vector is equivalent to `CGVectorMake(0, 0)`.
-public var CGVectorZero: CGVector { get { return CGVector() } }
+public var CGVectorZero: CGVector {
+    get {
+        return CGVector()
+    }
+}
 
 extension CGVector {
         /// The vector magnitude.
@@ -24,5 +28,17 @@ extension CGVector {
         @_transparent get {
             return CGAngle(asin(dy / magnitude)) + (dx < 0 && dy > 0 ? 90° : 0°) - (dx < 0 && dy < 0 ? 90° : 0°) + (dx < 0 && dy == 0 ? 180° : 0°)
         }
+    }
+    
+    // Returns a reversed copy of `self`.
+    @_transparent
+    public func reversed() -> CGVector {
+        return CGVector(dx: -self.dx, dy: -self.dy)
+    }
+    
+    // Reverse `self`
+    @_transparent
+    public mutating func reverseInPlace() {
+        self = self.reversed()
     }
 }
