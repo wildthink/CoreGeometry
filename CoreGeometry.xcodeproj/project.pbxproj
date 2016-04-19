@@ -84,6 +84,7 @@
 		3F2ED9BF1CB68A5800D2944A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F2ED9E51CB6AFF500D2944A /* ObjectiveCBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObjectiveCBridge.swift; path = Source/ObjectiveCBridge.swift; sourceTree = "<group>"; };
 		3F3808D31CC11551003543F6 /* CGVectorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CGVectorExtension.swift; path = Source/CGVectorExtension.swift; sourceTree = "<group>"; };
+		3F3808D81CC620BD003543F6 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = CoreGeometry_macOSX/MyPlayground.playground; sourceTree = "<group>"; };
 		3F6E43F51CB7D7D900099AF7 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Functions.swift; path = Source/Functions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +154,7 @@
 				3F2ED9E51CB6AFF500D2944A /* ObjectiveCBridge.swift */,
 				3F2ED9A31CB65D0A00D2944A /* Operators.swift */,
 				3F6E43F51CB7D7D900099AF7 /* Functions.swift */,
+				3F3808D81CC620BD003543F6 /* MyPlayground.playground */,
 			);
 			name = Source;
 			sourceTree = "<group>";

@@ -9,14 +9,23 @@
 import CoreGraphics
 
 extension CGSize {
+    /**
+     Init a size of `(square,square)`.
+     */
     @_transparent public init(square: CGFloat) {
         self.init(width: square, height: square)
     }
     
+    /**
+     Init a size of `(square,square)`.
+     */
     @_transparent public init(square: Double) {
         self.init(width: square, height: square)
     }
     
+    /**
+     Init a size of `(square,square)`.
+     */
     @_transparent public init(square: Int) {
         self.init(width: square, height: square)
     }

@@ -8,10 +8,10 @@
 
 @_exported import CoreGraphics
 
-public let CG_PI_4 = CGFloat(M_PI_4)
-public let CG_PI_2 = CGFloat(M_PI_2)
-public let CG_PI = CGFloat(M_PI)
-public let CG_2_PI = 2.0 * CGFloat(M_PI)
+internal let CG_PI_4 = CGFloat(M_PI_4)
+internal let CG_PI_2 = CGFloat(M_PI_2)
+internal let CG_PI = CGFloat(M_PI)
+internal let CG_2_PI = 2.0 * CGFloat(M_PI)
 
 public var CGAngleZero: CGAngle { return CGAngle() }
 

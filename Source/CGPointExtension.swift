@@ -23,7 +23,7 @@ extension CGPoint {
      Returns a copy of `self` translated along the given vector.
      */
     @_transparent
-    public func translateBy(vector: CGVector) -> CGPoint {
+    public func translated(by vector: CGVector) -> CGPoint {
         return CGPoint(x: self.x + vector.dx, y: self.y + vector.dy)
     }
     
@@ -31,7 +31,7 @@ extension CGPoint {
      Returns a copy of `self` translated by `tx` on the X-axis and by `ty` on the Y-axis.
      */
     @_transparent
-    public func translateBy(tx tx: CGFloat, ty: CGFloat) -> CGPoint {
+    public func translated(byTx tx: CGFloat, ty: CGFloat) -> CGPoint {
         return CGPoint(x: self.x + tx, y: self.y + ty)
     }
     
@@ -39,7 +39,7 @@ extension CGPoint {
      Returns a copy of `self` translated by `tx` on the X-axis and by `ty` on the Y-axis.
      */
     @_transparent
-    public func translateBy(tx tx: Double, ty: Double) -> CGPoint {
+    public func translated(byTx tx: Double, ty: Double) -> CGPoint {
         return CGPoint(x: self.x + CGFloat(tx), y: self.y + CGFloat(ty))
     }
     
@@ -47,7 +47,7 @@ extension CGPoint {
      Returns a copy of `self` translated by `tx` on the X-axis and by `ty` on the Y-axis.
      */
     @_transparent
-    public func translateBy(tx tx: Int, ty: Int) -> CGPoint {
+    public func translated(byTx tx: Int, ty: Int) -> CGPoint {
         return CGPoint(x: self.x + CGFloat(tx), y: self.y + CGFloat(ty))
     }
     
@@ -55,32 +55,32 @@ extension CGPoint {
      Translates `self` along the given vector.
      */
     @_transparent
-    public mutating func translateInPlace(vector: CGVector) {
-        self = self.translateBy(vector)
+    public mutating func translateInPlace(by vector: CGVector) {
+        self = self.translated(by: vector)
     }
     
     /**
      Translates `self` by `tx` on the X-axis and by `ty` on the Y-axis.
      */
     @_transparent
-    public mutating func translateInPlace(tx tx: CGFloat, ty: CGFloat) {
-        self = self.translateBy(tx: tx, ty: ty)
+    public mutating func translateInPlace(byTx tx: CGFloat, ty: CGFloat) {
+        self = self.translated(byTx: tx, ty: ty)
     }
     
     /**
      Translates `self` by `tx` on the X-axis and by `ty` on the Y-axis.
      */
     @_transparent
-    public mutating func translateInPlace(tx tx: Double, ty: Double) {
-        self = self.translateBy(tx: tx, ty: ty)
+    public mutating func translateInPlace(byTx tx: Double, ty: Double) {
+        self = self.translated(byTx: tx, ty: ty)
     }
     
     /**
      Translates `self` by `tx` on the X-axis and by `ty` on the Y-axis.
      */
     @_transparent
-    public mutating func translateInPlace(tx tx: Int, ty: Int) {
-        self = self.translateBy(tx: tx, ty: ty)
+    public mutating func translateInPlace(byTx tx: Int, ty: Int) {
+        self = self.translated(byTx: tx, ty: ty)
     }
     
     /**
@@ -88,7 +88,7 @@ extension CGPoint {
      
      - note: Rotates CW on iOS and CCW on OS X.
      */
-    public func rotateRelativeTo(center: CGPoint, by angle: CGAngle) -> CGPoint {
+    public func rotated(relativeTo center: CGPoint, by angle: CGAngle) -> CGPoint {
         var transform = CGAffineTransformMakeTranslation(center.x, center.y)
         transform = CGAffineTransformRotate(transform, angle.normalized.native)
         transform = CGAffineTransformTranslate(transform, -center.x, -center.y)
@@ -100,7 +100,7 @@ extension CGPoint {
      
      - note: Rotates CW on iOS and CCW on OS X.
      */
-    public mutating func rotateInPlace(center: CGPoint, by angle: CGAngle) {
-        self = self.rotateRelativeTo(center, by: angle)
+    public mutating func rotateInPlace(relativeTo center: CGPoint, by angle: CGAngle) {
+        self = self.rotated(relativeTo: center, by: angle)
     }
 }
