@@ -24,6 +24,8 @@ Add `github "Pyroh/CoreGeometry ~> 1.0"` to your `Cartfile` and run `carthage up
 5. Profit.
 
 ## Quickstart
+> Because every view on iOS is flipped by default keep in mind that `CGAngle` objects rotate clockwise. On OS X they rotate counter-clockwise as expected.
+
 Once you `import CoreGeometry` you gain access to a lot of things:
 
 ### `CGAngle`
@@ -198,14 +200,14 @@ vector.reverseInPlace()
 `CoreGeometry` brings three other operators in addition to `°`.
 
 #### ±
-This operator return `true` if `lhs > -rhs && lhs < rhs`, `false ` otherwise.
+This operator return `true` if `-rhs < lhs > rhs`, `false ` otherwise.
 
 #### ±=
-This operator return `true` if `lhs >= -rhs && lhs <= rhs`, `false ` otherwise.
+This operator return `true` if `-rhs ≤ lhs ≥ rhs`, `false ` otherwise.
 
 #### =~ 
 This operator where solely made to test `CoreGeometry` functionalities.  
-When using rotations and matrix calculation and due to floats rounding sometimes values that should be equal are not. Thanks to the `±` operator we can easily test if one `CGAngle` is *barely* equal to another.  
+When using rotations and matrix calculation and due to floats rounding sometimes values that should be equal are not. Thanks to the `=~` operator we can easily test if a `CGAngle` is *barely* equal to another.  
 Feel free to use it as you wish.
 
 ## License
