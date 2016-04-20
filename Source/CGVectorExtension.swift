@@ -26,7 +26,7 @@ extension CGVector {
         /// The vector direction.
     public var direction: CGAngle {
         @_transparent get {
-            return CGAngle(asin(dy / magnitude)) + (dx < 0 && dy > 0 ? 90° : 0°) - (dx < 0 && dy < 0 ? 90° : 0°) + (dx < 0 && dy == 0 ? 180° : 0°)
+            return CGAngle(atan2(dy, dx)).normalized
         }
     }
     
