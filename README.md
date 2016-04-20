@@ -57,6 +57,7 @@ If writing `let angle: CGAngle = 2.234` is easy, writing `let angle = 128°` is 
 > Like any other struct of `CoreGraphics` numerical values passed to `CoreGeometry`'s struct methods or initializers can be either of type `Int`, `Double` or `CGFloat`.
 
 #### `CGPoint`
+##### Rotate
 You can get a copy of a `CGPoint` rotated around a center:
 ```Swift
 let point = CGPoint(x: 10, y: 10)
@@ -71,6 +72,7 @@ var point = CGPoint(x: 10, y: 10)
 point.rotateInPlace(relativeTo: CGPointZero, by: CGAngle.PI)
 ```
 
+##### Translate
 You can also get a copy of a translated `CGPoint`:
 ```Swift
 let point = CGPoint(x: 10, y: 10)
@@ -87,6 +89,7 @@ point.translateInPlace(byTx: 10, ty: 10)
 
 (These methods also accept one `CGVector` argument)
 
+##### Misc.
 Speaking of vectors you can get the vector that exists between 2 `CGPoints`:
 ```Swift
 let point = CGPoint(x: 10, y: 10)
@@ -95,6 +98,7 @@ point.getVector(CGPoint(x: 20, y: 20))
 ```
 
 #### `CGRect`
+##### Rotate & translate
 As `CGPoint` you can rotate and translate any `CGRect` instance:
 
 ```Swift
@@ -115,6 +119,7 @@ var rect6 = CGRect(x: 10, y: 10, width: 50, height: 50)
 rect6.translateInPlace(tx: 10, ty: 10)
 ```
 
+##### Center
 With `CoreGeometry` you have now access to a new property: `center`. It's of type `CGPoint` and represents the rect's center:
 
 ```Swift
@@ -143,6 +148,7 @@ var rect = CGRect(center: CGPoint(x: 20, y: 20), size: CGSize(width: 40, height:
 rect.centerInPlace(CGPointZero)
 ```
 
+##### Slide
 Finally you should want to translate a rect circularly around a point you can, in `CoreGeometry` it's called *sliding*:
 
 ```Swift
