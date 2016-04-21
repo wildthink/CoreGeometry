@@ -42,6 +42,7 @@ public extension CGRect {
     }
 
     // Returns a copy of `self` centered to the given point.
+    @warn_unused_result
     public func centered(at point: CGPoint) -> CGRect {
         guard !self.isEmpty && !self.isInfinite else { return self }
         let origin = CGPoint(x: point.x - self.width / 2.0, y: point.y - self.height / 2.0)
@@ -49,17 +50,20 @@ public extension CGRect {
     }
 
     // Returns a copy of self centered at `(x,y)`.
+    @warn_unused_result
     public func centered(atX x: CGFloat, y: CGFloat) -> CGRect {
         return self.centered(at: CGPoint(x: x, y: y))
     }
 
     // Returns a copy of self centered at `(x,y)`.
+    @warn_unused_result
     public func centered(atX x: Double, y: Double) -> CGRect {
         return self.centered(at: CGPoint(x: x, y: y))
     }
 
     
     // Returns a copy of self centered at `(x,y)`.
+    @warn_unused_result
     public func centered(atX x: Int, y: Int) -> CGRect {
         return self.centered(at: CGPoint(x: x, y: y))
     }
@@ -83,27 +87,44 @@ public extension CGRect {
     public mutating func centerInPlace(x x: Int, y: Int) {
         self = self.centered(atX: x, y: y)
     }
+    
+    // Returns a copy of self with `origin` = `CGPointZero`.
+    @_transparent
+    @warn_unused_result
+    public func reseted() -> CGRect {
+        return CGRect(center: CGPointZero, size: self.size)
+    }
+    
+    // Make `self` origin equal to `CGPointZero`.
+    @_transparent
+    public mutating func reset() {
+        self.origin = CGPointZero
+    }
 
     // Returns a copy of `self` translated by the given vector.
     @_transparent
+    @warn_unused_result
     public func translated(by vector: CGVector) -> CGRect {
         return CGRect(origin: self.origin.translated(by: vector), size: self.size)
     }
 
     // Returns a copy of `self` translated by `(tx,ty)`.
     @_transparent
+    @warn_unused_result
     public func translated(byTx tx: CGFloat, ty: CGFloat) -> CGRect {
         return CGRect(origin: self.origin.translated(byTx: tx, ty: ty), size: self.size)
     }
 
     // Returns a copy of `self` translated by `(tx,ty)`.
     @_transparent
+    @warn_unused_result
     public func translated(byTx tx: Double, ty: Double) -> CGRect {
         return CGRect(origin: self.origin.translated(byTx: tx, ty: ty), size: self.size)
     }
 
     // Returns a copy of `self` translated by `(tx,ty)`.
     @_transparent
+    @warn_unused_result
     public func translated(byTx tx: Int, ty: Int) -> CGRect {
         return CGRect(origin: self.origin.translated(byTx: tx, ty: ty), size: self.size)
     }
