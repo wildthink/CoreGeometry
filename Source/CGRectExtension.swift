@@ -92,13 +92,13 @@ public extension CGRect {
     @_transparent
     @warn_unused_result
     public func reseted() -> CGRect {
-        return CGRect(center: CGPointZero, size: self.size)
+        return CGRect(x: 0, y: 0, width: self.width, height: self.height)
     }
     
     // Make `self` origin equal to `CGPointZero`.
     @_transparent
     public mutating func reset() {
-        self.origin = CGPointZero
+        self.origin = CGPoint(x: 0, y: 0)
     }
 
     // Returns a copy of `self` translated by the given vector.
