@@ -19,6 +19,86 @@ public extension CGRect {
             self.origin = newValue.translated(by: self.center.getVector(self.origin))
         }
     }
+    
+    @_transparent
+    public var leftMin: CGPoint {
+        get {
+            return CGPoint(x: self.minX, y: self.minY)
+        }
+        set {
+            self.origin = newValue.translated(by: self.leftMin.getVector(self.origin))
+        }
+    }
+    
+    @_transparent
+    public var leftMax: CGPoint {
+        get {
+            return CGPoint(x: self.minX, y: self.maxY)
+        }
+        set {
+            self.origin = newValue.translated(by: self.leftMax.getVector(self.origin))
+        }
+    }
+    
+    @_transparent
+    public var left: CGPoint {
+        get {
+            return CGPoint(x: self.minX, y: self.midY)
+        }
+        set {
+            self.origin = newValue.translated(by: self.left.getVector(self.origin))
+        }
+    }
+    
+    @_transparent
+    public var rightMin: CGPoint {
+        get {
+            return CGPoint(x: self.maxX, y: self.minY)
+        }
+        set {
+            self.origin = newValue.translated(by: self.rightMin.getVector(self.origin))
+        }
+    }
+    
+    @_transparent
+    public var rightMax: CGPoint {
+        get {
+            return CGPoint(x: self.maxX, y: self.maxY)
+        }
+        set {
+            self.origin = newValue.translated(by: self.rightMax.getVector(self.origin))
+        }
+    }
+    
+    @_transparent
+    public var right: CGPoint {
+        get {
+            return CGPoint(x: self.maxX, y: self.midY)
+        }
+        set {
+            self.origin = newValue.translated(by: self.right.getVector(self.origin))
+        }
+    }
+    
+    @_transparent
+    public var min: CGPoint {
+        get {
+            return CGPoint(x: self.midX, y: self.minY)
+        }
+        set {
+            self.origin = newValue.translated(by: self.min.getVector(self.origin))
+        }
+    }
+    
+    @_transparent
+    public var max: CGPoint {
+        get {
+            return CGPoint(x: self.midX, y: self.maxY)
+        }
+        set {
+            self.origin = newValue.translated(by: self.max.getVector(self.origin))
+        }
+    }
 
     @_transparent
     public init(center: CGPoint, size: CGSize) {
