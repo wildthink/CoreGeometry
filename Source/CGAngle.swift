@@ -480,7 +480,7 @@ public func +(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
 @_transparent
 @warn_unused_result
 public func +(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
-    return CGAngle(lhs.native + rhs)
+    return lhs + CGAngle(rhs)
 }
 
 @_transparent
@@ -492,7 +492,7 @@ public func -(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
 @_transparent
 @warn_unused_result
 public func -(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
-    return CGAngle(lhs.native + rhs)
+    return lhs - CGAngle(rhs)
 }
 
 @_transparent
@@ -504,7 +504,7 @@ public func *(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
 @_transparent
 @warn_unused_result
 public func *(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
-    return CGAngle(lhs.native + rhs)
+    return lhs * CGAngle(rhs)
 }
 
 @_transparent
@@ -515,7 +515,7 @@ public func /(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
 @_transparent
 @warn_unused_result
 public func /(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
-    return CGAngle(lhs.native + rhs)
+    return lhs / CGAngle(rhs)
 }
 
 @_transparent
@@ -527,7 +527,7 @@ public func %(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
 @_transparent
 @warn_unused_result
 public func %(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
-    return CGAngle(lhs.native + rhs)
+    return lhs % CGAngle(rhs)
 }
 
 // CGAngle assignment operators.
