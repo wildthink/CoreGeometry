@@ -11,7 +11,7 @@ import CoreGraphics
 extension CGPoint {
     // Returns the vector that exists between `self` and `p2`.
     @_transparent
-    public func getVector(p2: CGPoint) -> CGVector {
+    public func getVector(_ p2: CGPoint) -> CGVector {
         return CGVector(dx: p2.x - self.x, dy: p2.y - self.y)
     }
     
@@ -69,10 +69,10 @@ extension CGPoint {
      - note: Rotates CW on iOS and CCW on OS X.
      */
     public func rotated(relativeTo center: CGPoint, by angle: CGAngle) -> CGPoint {
-        var transform = CGAffineTransformMakeTranslation(center.x, center.y)
-        transform = CGAffineTransformRotate(transform, angle.normalized.native)
-        transform = CGAffineTransformTranslate(transform, -center.x, -center.y)
-        return CGPointApplyAffineTransform(self, transform)
+        var transform = CGAffineTransform(translationX: center.x, y: center.y)
+        transform = transform.rotate(angle.normalized.native)
+        transform = transform.translateBy(x: -center.x, y: -center.y)
+        return self.apply(transform: transform)
     }
     
     /**

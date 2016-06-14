@@ -11,7 +11,7 @@
 internal let CG_PI_4 = CGFloat(M_PI_4)
 internal let CG_PI_2 = CGFloat(M_PI_2)
 internal let CG_PI = CGFloat(M_PI)
-internal let CG_2_PI = 2.0 * CGFloat(M_PI)
+internal let CG_2_PI = CGFloat(M_PI) * 2
 
 public var CGAngleZero: CGAngle { return CGAngle() }
 
@@ -39,7 +39,7 @@ extension CGAngle {
         /// The normalized value in `0..<2π`
     public var normalized: CGAngle {
         @_transparent get {
-            return CGAngle((CG_2_PI + native % CG_2_PI) % CG_2_PI)
+            return CGAngle((CG_2_PI + native.truncatingRemainder(dividingBy: CG_2_PI)).truncatingRemainder(dividingBy: CG_2_PI))
         }
     }
 
@@ -139,37 +139,30 @@ extension CGAngle {
 
 extension CGAngle {
     @_transparent public static var min: CGAngle {
-            return CGAngle(CGFloat.min)
+            return CGAngle(CGFloat.leastNormalMagnitude)
     }
 
     @_transparent public static var max: CGAngle {
-        return CGAngle(CGFloat.max)
+        return CGAngle(CGFloat.greatestFiniteMagnitude)
     }
 }
 
 extension CGAngle: Strideable {
     @warn_unused_result
-    public func advancedBy(n: CGAngle) -> CGAngle {
+    public func advanced(by n: CGAngle) -> CGAngle {
         return CGAngle(self.native + n.native)
     }
 
     @warn_unused_result
-    public func distanceTo(other: CGAngle) -> CGAngle {
+    public func distance(to other: CGAngle) -> CGAngle {
         return CGAngle(other.native - self.native)
     }
 }
 
-extension CGAngle: FloatingPointType {
-    public typealias _BitsType = UInt
+extension CGAngle: FloatingPoint {
+    public typealias Exponent = CGFloat.Exponent
 
-    public static func _fromBitPattern(bits: UInt) -> CGAngle {
-        return CGAngle(CGFloat._fromBitPattern(CGFloat._BitsType(bits)))
-    }
-
-    public func _toBitPattern() -> UInt {
-        return UInt(native._toBitPattern())
-    }
-
+    // Initializers
     @_transparent public init(_ value: UInt8) {
         self.native = CGFloat(value)
     }
@@ -209,53 +202,148 @@ extension CGAngle: FloatingPointType {
     @_transparent public init(_ value: Int) {
         self.native = CGFloat(value)
     }
-
-    public static var infinity: CGAngle {
-        return CGAngle(CGFloat.infinity)
+    
+    @_transparent public init(sign: FloatingPointSign, exponent: CGAngle.Exponent, significand: CGAngle) {
+        self.native = CGFloat(sign: sign, exponent: exponent, significand: significand.native)
     }
-
-    public static var NaN: CGAngle {
-        return CGAngle(CGFloat.NaN)
+    
+    @_transparent public init(signOf: CGAngle, magnitudeOf: CGAngle) {
+        self.native = CGFloat(signOf: signOf.native, magnitudeOf: magnitudeOf.native)
     }
-
-    public static var quietNaN: CGAngle {
-        return CGAngle(CGFloat.quietNaN)
+    
+    // Instance Properties
+    public var floatingPointClass: FloatingPointClassification {
+        return native.floatingPointClass
     }
-
-    public var isSignMinus: Bool {
-        return native.isSignMinus
-    }
-
-    public var isNormal: Bool {
-        return native.isNormal
-    }
-
+    
     public var isFinite: Bool {
         return native.isFinite
     }
-
+    
+    public var isInfinite: Bool {
+        return native.isInfinite
+    }
+    
+    public var isNaN: Bool {
+        return native.isNaN
+    }
+    
+    public var isNormal: Bool {
+        return native.isNormal
+    }
+    
+    public var isSubnormal: Bool {
+        return native.isSubnormal
+    }
+    
     public var isZero: Bool {
         return native.isZero
     }
 
-    public var isSubnormal: Bool {
-        return native.isSubnormal
+    public var exponent: CGAngle.Exponent {
+        return native.exponent
+    }
+    
+    public var isCanonical: Bool {
+        return native.isCanonical
+    }
+    
+    public var isSignalingNaN: Bool {
+        return native.isSignalingNaN
+    }
+    
+    public var nextDown: CGAngle {
+        return CGAngle(native.nextDown)
+    }
+    
+    public var nextUp: CGAngle {
+        return CGAngle(native.nextUp)
+    }
+    
+    public var sign: FloatingPointSign {
+        return native.sign
+    }
+    
+    public var significand: CGAngle {
+        return CGAngle(native.significand)
+    }
+    
+    public var ulp: CGAngle {
+        return CGAngle(native.ulp)
+        
+    }
+    
+    // Type properties
+    public static var infinity: CGAngle {
+        return CGAngle(CGFloat.infinity)
+    }
+    
+    public static var nan: CGAngle {
+        return CGAngle(CGFloat.nan)
+    }
+    
+    public static var greatestFiniteMagnitude: CGAngle {
+        return CGAngle(CGFloat.greatestFiniteMagnitude)
+    }
+    
+    public static var leastNonzeroMagnitude: CGAngle {
+        return CGAngle(CGFloat.leastNonzeroMagnitude)
+    }
+    
+    public static var leastNormalMagnitude: CGAngle {
+        return CGAngle(CGFloat.leastNormalMagnitude)
+    }
+    
+    public static var pi: CGAngle {
+        return CGAngle(CGFloat.pi)
+    }
+    
+    public static var radix: Int {
+        return CGFloat.radix
     }
 
-    public var isInfinite: Bool {
-        return native.isInfinite
+    public static var signalingNaN: CGAngle {
+        return CGAngle(CGFloat.signalingNaN)
     }
-
-    public var isNaN: Bool {
-        return native.isNaN
+    
+    public mutating func add(_ other: CGAngle) {
+        native.add(other.native)
     }
-
-    public var isSignaling: Bool {
-        return native.isSignaling
+    
+    public mutating func divide(by other: CGAngle) {
+        native.divide(by: other.native)
     }
-
-    public var floatingPointClass: FloatingPointClassification {
-        return native.floatingPointClass
+    
+    public mutating func formTruncatingRemainder(dividingBy other: CGAngle) {
+        native.formTruncatingRemainder(dividingBy: other.native)
+    }
+    
+    public func isEqual(to other: CGAngle) -> Bool {
+        return native.isEqual(to: other.native)
+    }
+    
+    public func isLess(than other: CGAngle) -> Bool {
+        return native.isLess(than: other.native)
+    }
+    
+    public func isLessThanOrEqualTo(_ other: CGAngle) -> Bool {
+        return native.isLessThanOrEqualTo(other.native)
+    }
+    
+    public func isTotallyOrdered(below other: CGAngle) -> Bool {
+        return native.isTotallyOrdered(below: other.native)
+    }
+    
+    public mutating func multiply(by other: CGAngle) {
+        native.multiply(by: other.native)
+    }
+    
+    public mutating func negate() {
+        native.negate()
+    }
+    
+    public mutating func subtract(_ other: CGAngle) {
+        native.subtract(other.native)
     }
 }
 
@@ -281,19 +369,19 @@ extension CGAngle {
     }
 }
 
-@available(*, unavailable, message="use CGAngle.min")
+@available(*, unavailable, message:"use CGAngle.min")
 public var CGFLOAT_MIN: CGAngle {
     fatalError("can't retrieve unavailable property")
 }
 
-@available(*, unavailable, message="use CGAngle.max")
+@available(*, unavailable, message:"use CGAngle.max")
 public var CGFLOAT_MAX: CGAngle {
     fatalError("can't retrieve unavailable property")
 }
 
 extension CGAngle: CustomReflectable {
-    public func customMirror() -> Mirror {
-        return Mirror(reflecting: native)
+    public var customMirror: Mirror {
+        return Mirror(reflecting: self)
     }
 }
 
@@ -327,7 +415,7 @@ extension CGAngle: CustomReflectable {
     /// Returns the absolute value of `x`
     @_transparent
     @warn_unused_result
-    public static func abs(x: CGAngle) -> CGAngle {
+    public static func abs(_ x: CGAngle) -> CGAngle {
         return CGAngle(CGFloat.abs(x.native))
     }
 }
@@ -418,7 +506,7 @@ extension CGAngle: CustomReflectable {
 @_transparent
 @warn_unused_result
 public func ==(lhs: CGAngle, rhs: CGAngle) -> Bool {
-    return lhs.native == rhs.native
+    return lhs.isEqual(to: rhs)
 }
 
 @_transparent
@@ -445,26 +533,26 @@ public prefix func + (x: CGAngle) -> CGAngle { return x }
 public prefix func - (x: CGAngle) -> CGAngle { return CGAngle(-x.native) }
 
 @_transparent
-public prefix func ++ (inout x: CGAngle) -> CGAngle {
+public prefix func ++ (x: inout CGAngle) -> CGAngle {
     x.native = CGAngle(x.native + 1.0).native
     return x
 }
 
 @_transparent
-public prefix func -- (inout x: CGAngle) -> CGAngle {
+public prefix func -- (x: inout CGAngle) -> CGAngle {
     x.native = CGAngle(x.native - 1.0).native
     return x
 }
 
 @_transparent
-public postfix func ++ (inout x: CGAngle) -> CGAngle {
+public postfix func ++ (x: inout CGAngle) -> CGAngle {
     let tmp = x
     x.native = CGAngle(x.native + 1.0).native
     return tmp
 }
 
 @_transparent
-public postfix func -- (inout x: CGAngle) -> CGAngle {
+public postfix func -- (x: inout CGAngle) -> CGAngle {
     let tmp = x
     x.native = CGAngle(x.native - 1.0).native
     return tmp
@@ -521,7 +609,7 @@ public func /(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
 @_transparent
 @warn_unused_result
 public func %(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
-    return CGAngle(lhs.native % rhs.native)
+    return CGAngle(lhs.native.truncatingRemainder(dividingBy: rhs.native))
 }
 
 @_transparent
@@ -532,52 +620,52 @@ public func %(lhs: CGAngle, rhs: CGFloat) -> CGAngle {
 
 // CGAngle assignment operators.
 @_transparent
-public func +=(inout lhs: CGAngle, rhs: CGAngle) {
+public func +=(lhs: inout CGAngle, rhs: CGAngle) {
     lhs.native = CGAngle(lhs.native + rhs.native).native
 }
 
 @_transparent
-public func +=(inout lhs: CGAngle, rhs: CGFloat) {
+public func +=(lhs: inout CGAngle, rhs: CGFloat) {
     lhs.native = CGAngle(lhs.native + rhs).native
 }
 
 @_transparent
-public func -=(inout lhs: CGAngle, rhs: CGAngle) {
+public func -=(lhs: inout CGAngle, rhs: CGAngle) {
     lhs.native = CGAngle(lhs.native - rhs.native).native
 }
 
 @_transparent
-public func -=(inout lhs: CGAngle, rhs: CGFloat) {
+public func -=(lhs: inout CGAngle, rhs: CGFloat) {
     lhs.native = CGAngle(lhs.native + rhs).native
 }
 
 @_transparent
-public func *=(inout lhs: CGAngle, rhs: CGAngle) {
+public func *=(lhs: inout CGAngle, rhs: CGAngle) {
     lhs.native = CGAngle(lhs.native * rhs.native).native
 }
 
 @_transparent
-public func *=(inout lhs: CGAngle, rhs: CGFloat) {
+public func *=(lhs: inout CGAngle, rhs: CGFloat) {
     lhs.native = CGAngle(lhs.native + rhs).native
 }
 
 @_transparent
-public func /=(inout lhs: CGAngle, rhs: CGAngle) {
+public func /=(lhs: inout CGAngle, rhs: CGAngle) {
     lhs.native = CGAngle(lhs.native / rhs.native).native
 }
 
 @_transparent
-public func /=(inout lhs: CGAngle, rhs: CGFloat) {
+public func /=(lhs: inout CGAngle, rhs: CGFloat) {
     lhs.native = CGAngle(lhs.native + rhs).native
 }
 
 @_transparent
-public func %=(inout lhs: CGAngle, rhs: CGAngle) {
-    lhs.native = CGAngle(lhs.native % rhs.native).native
+public func %=(lhs: inout CGAngle, rhs: CGAngle) {
+    lhs.native = CGAngle(lhs.native.truncatingRemainder(dividingBy: rhs.native)).native
 }
 
 @_transparent
-public func %=(inout lhs: CGAngle, rhs: CGFloat) {
+public func %=(lhs: inout CGAngle, rhs: CGFloat) {
     lhs.native = CGAngle(lhs.native + rhs).native
 }
 
@@ -585,383 +673,347 @@ public func %=(inout lhs: CGAngle, rhs: CGFloat) {
 
 @_transparent
 @warn_unused_result
-public func acos(x: CGFloat) -> CGAngle {
+public func acos(_ x: CGFloat) -> CGAngle {
     return CGAngle(acos(x))
 }
 
 @_transparent
 @warn_unused_result
-public func cos(x: CGAngle) -> CGFloat {
+public func cos(_ x: CGAngle) -> CGFloat {
     return cos(x.native)
 }
 
 @_transparent
 @warn_unused_result
-public func sin(x: CGAngle) -> CGFloat {
+public func sin(_ x: CGAngle) -> CGFloat {
     return sin(x.native)
 }
 
 @_transparent
 @warn_unused_result
-public func asin(x: CGFloat) -> CGAngle {
+public func asin(_ x: CGFloat) -> CGAngle {
     return CGAngle(asin(x))
 }
 
 @_transparent
 @warn_unused_result
-public func atan(x: CGFloat) -> CGAngle {
+public func atan(_ x: CGFloat) -> CGAngle {
     return CGAngle(atan(x))
 }
 
 @_transparent
 @warn_unused_result
-public func tan(x: CGAngle) -> CGFloat {
+public func tan(_ x: CGAngle) -> CGFloat {
     return tan(x.native)
 }
 
 @_transparent
 @warn_unused_result
-public func acosh(x: CGFloat) -> CGAngle {
+public func acosh(_ x: CGFloat) -> CGAngle {
     return CGAngle(acosh(x))
 }
 
 @_transparent
 @warn_unused_result
-public func asinh(x: CGFloat) -> CGAngle {
+public func asinh(_ x: CGFloat) -> CGAngle {
     return CGAngle(asinh(x))
 }
 
 @_transparent
 @warn_unused_result
-public func atanh(x: CGFloat) -> CGAngle {
+public func atanh(_ x: CGFloat) -> CGAngle {
     return CGAngle(atanh(x))
 }
 
 @_transparent
 @warn_unused_result
-public func cosh(x: CGAngle) -> CGFloat {
+public func cosh(_ x: CGAngle) -> CGFloat {
     return cosh(x.native)
 }
 
 @_transparent
 @warn_unused_result
-public func sinh(x: CGAngle) -> CGFloat {
+public func sinh(_ x: CGAngle) -> CGFloat {
     return sinh(x.native)
 }
 
 @_transparent
 @warn_unused_result
-public func tanh(x: CGAngle) -> CGFloat {
+public func tanh(_ x: CGAngle) -> CGFloat {
     return tanh(x.native)
 }
 
 @_transparent
 @warn_unused_result
-public func exp(x: CGAngle) -> CGAngle {
+public func exp(_ x: CGAngle) -> CGAngle {
     return CGAngle(exp(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func exp2(x: CGAngle) -> CGAngle {
+public func exp2(_ x: CGAngle) -> CGAngle {
     return CGAngle(exp2(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func expm1(x: CGAngle) -> CGAngle {
+public func expm1(_ x: CGAngle) -> CGAngle {
     return CGAngle(expm1(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func log(x: CGAngle) -> CGAngle {
+public func log(_ x: CGAngle) -> CGAngle {
     return CGAngle(log(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func log10(x: CGAngle) -> CGAngle {
+public func log10(_ x: CGAngle) -> CGAngle {
     return CGAngle(log10(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func log2(x: CGAngle) -> CGAngle {
+public func log2(_ x: CGAngle) -> CGAngle {
     return CGAngle(log2(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func log1p(x: CGAngle) -> CGAngle {
+public func log1p(_ x: CGAngle) -> CGAngle {
     return CGAngle(log1p(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func logb(x: CGAngle) -> CGAngle {
+public func logb(_ x: CGAngle) -> CGAngle {
     return CGAngle(logb(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func cbrt(x: CGAngle) -> CGAngle {
+public func cbrt(_ x: CGAngle) -> CGAngle {
     return CGAngle(cbrt(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func erf(x: CGAngle) -> CGAngle {
+public func erf(_ x: CGAngle) -> CGAngle {
     return CGAngle(erf(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func erfc(x: CGAngle) -> CGAngle {
+public func erfc(_ x: CGAngle) -> CGAngle {
     return CGAngle(erfc(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func tgamma(x: CGAngle) -> CGAngle {
+public func tgamma(_ x: CGAngle) -> CGAngle {
     return CGAngle(tgamma(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func fabs(x: CGAngle) -> CGAngle {
+public func fabs(_ x: CGAngle) -> CGAngle {
     return CGAngle(fabs(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func sqrt(x: CGAngle) -> CGAngle {
+public func sqrt(_ x: CGAngle) -> CGAngle {
     return CGAngle(sqrt(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func ceil(x: CGAngle) -> CGAngle {
+public func ceil(_ x: CGAngle) -> CGAngle {
     return CGAngle(ceil(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func floor(x: CGAngle) -> CGAngle {
+public func floor(_ x: CGAngle) -> CGAngle {
     return CGAngle(floor(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func nearbyint(x: CGAngle) -> CGAngle {
+public func nearbyint(_ x: CGAngle) -> CGAngle {
     return CGAngle(nearbyint(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func rint(x: CGAngle) -> CGAngle {
+public func rint(_ x: CGAngle) -> CGAngle {
     return CGAngle(rint(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func round(x: CGAngle) -> CGAngle {
+public func round(_ x: CGAngle) -> CGAngle {
     return CGAngle(round(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func trunc(x: CGAngle) -> CGAngle {
+public func trunc(_ x: CGAngle) -> CGAngle {
     return CGAngle(trunc(x.native))
 }
 
 @_transparent
 @warn_unused_result
-public func atan2(lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
+public func atan2(_ lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
     return CGAngle(atan2(lhs.native, rhs.native))
 }
 
 @_transparent
 @warn_unused_result
-public func hypot(lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
+public func hypot(_ lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
     return CGAngle(hypot(lhs.native, rhs.native))
 }
 
 @_transparent
 @warn_unused_result
-public func pow(lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
+public func pow(_ lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
     return CGAngle(pow(lhs.native, rhs.native))
 }
 
 @_transparent
 @warn_unused_result
-public func fmod(lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
+public func fmod(_ lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
     return CGAngle(fmod(lhs.native, rhs.native))
 }
 
 @_transparent
 @warn_unused_result
-public func remainder(lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
+public func remainder(_ lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
     return CGAngle(remainder(lhs.native, rhs.native))
 }
 
 @_transparent
 @warn_unused_result
-public func copysign(lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
+public func copysign(_ lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
     return CGAngle(copysign(lhs.native, rhs.native))
 }
 
 @_transparent
 @warn_unused_result
-public func nextafter(lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
+public func nextafter(_ lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
     return CGAngle(nextafter(lhs.native, rhs.native))
 }
 
 @_transparent
 @warn_unused_result
-public func fdim(lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
+public func fdim(_ lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
     return CGAngle(fdim(lhs.native, rhs.native))
 }
 
 @_transparent
 @warn_unused_result
-public func fmax(lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
+public func fmax(_ lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
     return CGAngle(fmax(lhs.native, rhs.native))
 }
 
 @_transparent
 @warn_unused_result
-public func fmin(lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
+public func fmin(_ lhs: CGAngle, _ rhs: CGAngle) -> CGAngle {
     return CGAngle(fmin(lhs.native, rhs.native))
 }
 
 @_transparent
 @warn_unused_result
-public func fpclassify(x: CGAngle) -> Int {
-    return fpclassify(x.native)
-}
-
-@_transparent
-@warn_unused_result
-public func isnormal(x: CGAngle) -> Bool {
-    return isnormal(x.native)
-}
-
-@_transparent
-@warn_unused_result
-public func isfinite(x: CGAngle) -> Bool {
-    return isfinite(x.native)
-}
-
-@_transparent
-@warn_unused_result
-public func isinf(x: CGAngle) -> Bool {
-    return isinf(x.native)
-}
-
-@_transparent
-@warn_unused_result
-public func isnan(x: CGAngle) -> Bool {
-    return isnan(x.native)
-}
-
-@_transparent
-@warn_unused_result
-public func signbit(x: CGAngle) -> Int {
-    return signbit(x.native)
-}
-
-@_transparent
-@warn_unused_result
-public func modf(x: CGAngle) -> (CGAngle, CGAngle) {
+public func modf(_ x: CGAngle) -> (CGAngle, CGAngle) {
     let (ipart, fpart) = modf(x.native)
     return (CGAngle(ipart), CGAngle(fpart))
 }
 
 @_transparent
 @warn_unused_result
-public func ldexp(x: CGAngle, _ n: Int) -> CGAngle {
+public func ldexp(_ x: CGAngle, _ n: Int) -> CGAngle {
     return CGAngle(ldexp(x.native, n))
 }
 
 @_transparent
 @warn_unused_result
-public func frexp(x: CGAngle) -> (CGAngle, Int) {
+public func frexp(_ x: CGAngle) -> (CGAngle, Int) {
     let (frac, exp) = frexp(x.native)
     return (CGAngle(frac), exp)
 }
 
 @_transparent
 @warn_unused_result
-public func ilogb(x: CGAngle) -> Int {
+public func ilogb(_ x: CGAngle) -> Int {
     return ilogb(x.native)
 }
 
 @_transparent
 @warn_unused_result
-public func scalbn(x: CGAngle, _ n: Int) -> CGAngle {
+public func scalbn(_ x: CGAngle, _ n: Int) -> CGAngle {
     return CGAngle(scalbn(x.native, n))
 }
 
 @_transparent
 @warn_unused_result
-public func lgamma(x: CGAngle) -> (CGAngle, Int) {
+public func lgamma(_ x: CGAngle) -> (CGAngle, Int) {
     let (value, sign) = lgamma(x.native)
     return (CGAngle(value), sign)
 }
 
 @_transparent
 @warn_unused_result
-public func remquo(x: CGAngle, _ y: CGAngle) -> (CGAngle, Int) {
+public func remquo(_ x: CGAngle, _ y: CGAngle) -> (CGAngle, Int) {
     let (rem, quo) = remquo(x.native, y.native)
     return (CGAngle(rem), quo)
 }
 
 @_transparent
 @warn_unused_result
-public func nan(tag: String) -> CGAngle {
+public func nan(_ tag: String) -> CGAngle {
     return CGAngle(nan(tag) as CGFloat)
 }
 
 @_transparent
 @warn_unused_result
-public func fma(x: CGAngle, _ y: CGAngle, _ z: CGAngle) -> CGAngle {
+public func fma(_ x: CGAngle, _ y: CGAngle, _ z: CGAngle) -> CGAngle {
     return CGAngle(fma(x.native, y.native, z.native))
 }
 
 @_transparent
 @warn_unused_result
-public func j0(x: CGAngle) -> CGAngle {
+public func j0(_ x: CGAngle) -> CGAngle {
     return CGAngle(j0(Double(x.native)))
 }
 
 @_transparent
 @warn_unused_result
-public func j1(x: CGAngle) -> CGAngle {
+public func j1(_ x: CGAngle) -> CGAngle {
     return CGAngle(j1(Double(x.native)))
 }
 
 @_transparent
 @warn_unused_result
-public func jn(n: Int, _ x: CGAngle) -> CGAngle {
+public func jn(_ n: Int, _ x: CGAngle) -> CGAngle {
     return CGAngle(jn(n, Double(x.native)))
 }
 
 @_transparent
 @warn_unused_result
-public func y0(x: CGAngle) -> CGAngle {
+public func y0(_ x: CGAngle) -> CGAngle {
     return CGAngle(y0(Double(x.native)))
 }
 
 @_transparent
 @warn_unused_result
-public func y1(x: CGAngle) -> CGAngle {
+public func y1(_ x: CGAngle) -> CGAngle {
     return CGAngle(y1(Double(x.native)))
 }
 
 @_transparent
 @warn_unused_result
-public func yn(n: Int, _ x: CGAngle) -> CGAngle {
+public func yn(_ n: Int, _ x: CGAngle) -> CGAngle {
     return CGAngle(yn(n, Double(x.native)))
 }
 

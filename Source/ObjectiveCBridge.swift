@@ -22,11 +22,11 @@ extension CGAngle: _ObjectiveCBridgeable {
         #if arch(i386) || arch(arm)
             return NSNumber(float: self.native.native)
         #elseif arch(x86_64) || arch(arm64)
-            return NSNumber(double: self.native.native)
+            return NSNumber(value: self.native.native)
         #endif
     }
     
-    public static func _forceBridgeFromObjectiveC(source: _ObjectiveCType, inout result: CGAngle?) {
+    public static func _forceBridgeFromObjectiveC(_ source: _ObjectiveCType, result: inout CGAngle?) {
         #if arch(i386) || arch(arm)
             result = CGAngle(source.floatValue)
         #elseif arch(x86_64) || arch(arm64)
@@ -35,7 +35,7 @@ extension CGAngle: _ObjectiveCBridgeable {
         
     }
     
-    public static func _conditionallyBridgeFromObjectiveC(source: _ObjectiveCType, inout result: CGAngle?) -> Bool {
+    public static func _conditionallyBridgeFromObjectiveC(_ source: _ObjectiveCType, result: inout CGAngle?) -> Bool {
         #if arch(i386) || arch(arm)
             result = CGAngle(source.floatValue)
         #elseif arch(x86_64) || arch(arm64)
@@ -44,7 +44,7 @@ extension CGAngle: _ObjectiveCBridgeable {
         return true
     }
     
-    public static func _unconditionallyBridgeFromObjectiveC(source: _ObjectiveCType?) -> CGAngle {
+    public static func _unconditionallyBridgeFromObjectiveC(_ source: _ObjectiveCType?) -> CGAngle {
         if let source = source {
             #if arch(i386) || arch(arm)
                 return CGAngle(source.floatValue)

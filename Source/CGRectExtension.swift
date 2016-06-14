@@ -108,7 +108,7 @@ public extension CGRect {
 
     
     // Returns a copy of `self` centered relative to the given rect.
-    @warn_unused_result(mutable_variant = "centerRelativeInPlace")
+    @warn_unused_result(mutable_variant:"centerRelativeInPlace")
     public func centered(relativeTo rect: CGRect) -> CGRect {
         guard !self.isEmpty && !self.isInfinite else { return self }
         let rectCenter = rect.center
@@ -149,22 +149,22 @@ public extension CGRect {
     }
 
     // Center `self` at the given point.
-    public mutating func centerInPlace(point: CGPoint) {
+    public mutating func centerInPlace(_ point: CGPoint) {
         self = self.centered(at: point)
     }
 
     // Center `self` at `(x,y)`
-    public mutating func centerInPlace(x x: CGFloat, y: CGFloat) {
+    public mutating func centerInPlace(x: CGFloat, y: CGFloat) {
         self = self.centered(atX: x, y: y)
     }
 
     // Center `self` at `(x,y)`
-    public mutating func centerInPlace(x x: Double, y: Double) {
+    public mutating func centerInPlace(x: Double, y: Double) {
         self = self.centered(atX: x, y: y)
     }
     
     // Center `self` at `(x,y)`
-    public mutating func centerInPlace(x x: Int, y: Int) {
+    public mutating func centerInPlace(x: Int, y: Int) {
         self = self.centered(atX: x, y: y)
     }
     
@@ -211,25 +211,25 @@ public extension CGRect {
 
     // Translate `self` by the given vector.
     @_transparent
-    public mutating func translateInPlace(vector: CGVector) {
+    public mutating func translateInPlace(_ vector: CGVector) {
         self = self.translated(by: vector)
     }
 
     // Translate `self` by `(tx,ty)`.
     @_transparent
-    public mutating func translateInPlace(tx tx: CGFloat, ty: CGFloat) {
+    public mutating func translateInPlace(tx: CGFloat, ty: CGFloat) {
         self = self.translated(byTx: tx, ty: ty)
     }
 
     // Translate `self` by `(tx,ty)`.
     @_transparent
-    public mutating func translateInPlace(tx tx: Double, ty: Double) {
+    public mutating func translateInPlace(tx: Double, ty: Double) {
         self = self.translated(byTx: tx, ty: ty)
     }
 
     // Translate `self` by `(tx,ty)`.
     @_transparent
-    public mutating func translateInPlace(tx tx: Int, ty: Int) {
+    public mutating func translateInPlace(tx: Int, ty: Int) {
         self = self.translated(byTx: tx, ty: ty)
     }
 
@@ -240,10 +240,10 @@ public extension CGRect {
      */
     @warn_unused_result
     public func rotated(relativeTo center: CGPoint, by angle: CGAngle) -> CGRect {
-        var transform = CGAffineTransformMakeTranslation(center.x, center.y)
-        transform = CGAffineTransformRotate(transform, angle.normalized.native)
-        transform = CGAffineTransformTranslate(transform, -center.x, -center.y)
-        return CGRectApplyAffineTransform(self, transform)
+        var transform = CGAffineTransform(translationX: center.x, y: center.y)
+        transform = transform.rotate(angle.normalized.native)
+        transform = transform.translateBy(x: -center.x, y: -center.y)
+        return self.apply(transform: transform)
     }
 
     /**
