@@ -3,6 +3,9 @@
 [![License](https://img.shields.io/badge/license-MIT-71787A.svg)](https://tldrlegal.com/license/mit-license)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![banner](http://pyroh.github.io/ressources/CoreGeometry/Banner.png)
+
+> **At this time there's no Swift 3 support. Since at least one thing may break with every new Xcode beta release I've decided to delay the Swift 3 support until GM release. You can fork the project and modify the code but I won't accept any pull request that tries to bring Swift 3's support.**
+
 ## Goals
 `CoreGeometry` is a collection of helpers, extensions, types or even operators that make `CoreGraphics` programming easier.  
 `CoreGeometry` isn't focused on drawing but (as its name suggests) helps the programmer to deal with angles, rectangles, points, vectors and any rotation or translation that could happen to them. It also introduces `CGAngle` a struct that contains an angle value and make angle rotations and algebra easier. 
