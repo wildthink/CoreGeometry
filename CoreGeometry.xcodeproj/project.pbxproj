@@ -45,6 +45,9 @@
 		3F6E43F91CB7DDDD00099AF7 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6E43F51CB7D7D900099AF7 /* Functions.swift */; };
 		3F989E221CB6E50200CD8BA9 /* ObjectiveCBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2ED9E51CB6AFF500D2944A /* ObjectiveCBridge.swift */; };
 		3F989E231CB6E50300CD8BA9 /* ObjectiveCBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2ED9E51CB6AFF500D2944A /* ObjectiveCBridge.swift */; };
+		9662BC981D73CFB000F99FA4 /* Turtle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662BC971D73CFB000F99FA4 /* Turtle.swift */; };
+		96AFFDB81D7B14DB005C9329 /* LineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AFFDB71D7B14DB005C9329 /* LineSegment.swift */; };
+		96AFFDB91D7B14DB005C9329 /* LineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AFFDB71D7B14DB005C9329 /* LineSegment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +89,8 @@
 		3F3808D31CC11551003543F6 /* CGVectorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CGVectorExtension.swift; path = Source/CGVectorExtension.swift; sourceTree = "<group>"; };
 		3F3808D81CC620BD003543F6 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = CoreGeometry_macOSX/MyPlayground.playground; sourceTree = "<group>"; };
 		3F6E43F51CB7D7D900099AF7 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Functions.swift; path = Source/Functions.swift; sourceTree = "<group>"; };
+		9662BC971D73CFB000F99FA4 /* Turtle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Turtle.swift; path = Source/Turtle.swift; sourceTree = "<group>"; };
+		96AFFDB71D7B14DB005C9329 /* LineSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineSegment.swift; path = Source/LineSegment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +160,8 @@
 				3F2ED9A31CB65D0A00D2944A /* Operators.swift */,
 				3F6E43F51CB7D7D900099AF7 /* Functions.swift */,
 				3F3808D81CC620BD003543F6 /* MyPlayground.playground */,
+				9662BC971D73CFB000F99FA4 /* Turtle.swift */,
+				96AFFDB71D7B14DB005C9329 /* LineSegment.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -392,6 +399,8 @@
 				3F2ED9E61CB6AFF500D2944A /* ObjectiveCBridge.swift in Sources */,
 				3F6E43F61CB7D7D900099AF7 /* Functions.swift in Sources */,
 				3F3808D41CC11551003543F6 /* CGVectorExtension.swift in Sources */,
+				96AFFDB81D7B14DB005C9329 /* LineSegment.swift in Sources */,
+				9662BC981D73CFB000F99FA4 /* Turtle.swift in Sources */,
 				3F2ED9A11CB29CD700D2944A /* CGAngle.swift in Sources */,
 				3F2ED99E1CB29CD700D2944A /* CGRectExtension.swift in Sources */,
 				3F2ED9A01CB29CD700D2944A /* CGPointExtension.swift in Sources */,
@@ -420,6 +429,7 @@
 			files = (
 				3F2ED9CC1CB68A9300D2944A /* CGSizeExtension.swift in Sources */,
 				3F2ED9CF1CB68A9300D2944A /* Operators.swift in Sources */,
+				96AFFDB91D7B14DB005C9329 /* LineSegment.swift in Sources */,
 				3F2ED9E71CB6AFF500D2944A /* ObjectiveCBridge.swift in Sources */,
 				3F6E43F81CB7DDDD00099AF7 /* Functions.swift in Sources */,
 				3F3808D51CC11E2C003543F6 /* CGVectorExtension.swift in Sources */,
